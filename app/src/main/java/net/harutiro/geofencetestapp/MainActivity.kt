@@ -20,6 +20,7 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        // TODO:Staticで持ってくるのを止める。
         MainViewModel.activity = this
 
         setContent {

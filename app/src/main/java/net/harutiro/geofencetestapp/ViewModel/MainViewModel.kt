@@ -18,6 +18,7 @@ class MainViewModel(_app: Application): AndroidViewModel(_app) {
 
     private val application = _app
 
+    // TODO:Staticで持ってくるのを止める。
     companion object {
         var activity: Activity? = null
     }
