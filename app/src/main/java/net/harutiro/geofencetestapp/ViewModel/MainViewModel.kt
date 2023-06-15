@@ -24,17 +24,23 @@ class MainViewModel(_app: Application): AndroidViewModel(_app) {
     }
     var geofenceRepository:GeofenceRepository? = null
 
+
+    init {
+        if(activity != null){
+           geofenceRepository = GeofenceRepository(activity!!)
+        }
+    }
+
     fun startGeofence() {
         Log.d(TAG,"startGeofence")
 
         // application から activityを受け取る
-        geofenceRepository = GeofenceRepository(activity?:return)
 
         val entry = EntryData(
             key = "test",
             value =  LatLng(
-                35.1836,
-                137.1119
+                34.810950,
+                137.313826
             )
         )
 
@@ -44,6 +50,12 @@ class MainViewModel(_app: Application): AndroidViewModel(_app) {
 
         geofenceRepository?.addGeofences()
 
+    }
+
+
+    fun stopGeofence() {
+        Log.d(TAG,"stopGeofence")
+        geofenceRepository?.stopGeofece()
     }
 
 
