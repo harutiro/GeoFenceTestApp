@@ -35,10 +35,12 @@ fun MainScreen(mainViewModel:MainViewModel = viewModel()){
                 mainViewModel.startGeofence()
             }
         ) {
-            Text("Hello World!")
+            Text("Start Geofence")
         }
     }
 }
+
+
 
 @Preview(showBackground = true)
 @Composable
