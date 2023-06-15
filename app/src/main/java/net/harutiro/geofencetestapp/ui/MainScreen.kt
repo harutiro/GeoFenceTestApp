@@ -37,6 +37,14 @@ fun MainScreen(mainViewModel:MainViewModel = viewModel()){
         ) {
             Text("Start Geofence")
         }
+
+        Button(
+            onClick = {
+                mainViewModel.stopGeofence()
+            }
+        ) {
+            Text("止める")
+        }
     }
 }
 

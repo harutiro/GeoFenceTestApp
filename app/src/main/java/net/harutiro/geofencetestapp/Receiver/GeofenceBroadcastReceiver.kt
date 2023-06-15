@@ -14,11 +14,13 @@ class GeofenceBroadcastReceiver : BroadcastReceiver() {
     // ...
     override fun onReceive(context: Context?, intent: Intent?) {
 
-        val geofencingEvent = if(intent != null){
-            GeofencingEvent.fromIntent(intent)
-        }else{
-            null
-        }
+        Log.d(TAG,"onReceive")
+
+        val geofencingEvent = GeofencingEvent.fromIntent(intent!!)
+
+
+        Log.d(TAG,"intent: $intent")
+        Log.d(TAG,"geofencingEvent: $geofencingEvent")
 
         if (geofencingEvent?.hasError() == true) {
             val errorMessage = GeofenceStatusCodes
@@ -36,9 +38,26 @@ class GeofenceBroadcastReceiver : BroadcastReceiver() {
             geofenceTransition == Geofence.GEOFENCE_TRANSITION_EXIT
         ) {
 
-            // Get the geofences that were triggered. A single event can trigger
-            // multiple geofences.
             val triggeringGeofences = geofencingEvent.triggeringGeofences
+
+            if (geofencingEvent.hasError()) {
+                // エラーイベントが発生した場合の処理
+                val errorCode: Int = geofencingEvent.errorCode
+                Log.e("Geofence", "Geofencing error: $errorCode")
+            } else {
+                // ジオフェンスのトリガーイベントが発生した場合の処理
+                val triggeringGeofence: List<Geofence>? = geofencingEvent.triggeringGeofences
+
+                // トリガーされたジオフェンスの情報を利用して必要な処理を行います
+                if (triggeringGeofence != null) {
+                    for (geofence in triggeringGeofence) {
+                        val requestId: String = geofence.requestId
+                        // ジオフェンスの情報を利用して必要な処理を行います
+                        // 例: ジオフェンスのIDを表示
+                        Log.d(TAG, "Geofence ID: $requestId")
+                    }
+                }
+            }
 
 //            // Get the transition details as a String.
 //            val geofenceTransitionDetails = getGeofenceTransitionDetails(

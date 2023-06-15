@@ -9,6 +9,7 @@ import android.util.Log
 import androidx.core.app.ActivityCompat
 import com.google.android.gms.location.Geofence
 import com.google.android.gms.location.GeofencingClient
+import com.google.android.gms.location.GeofencingEvent
 import com.google.android.gms.location.GeofencingRequest
 import com.google.android.gms.location.LocationServices
 import net.harutiro.geofencetestapp.Model.EntryData
@@ -31,7 +32,8 @@ class GeofenceRepository(_activity: Activity) {
         val intent = Intent(activity, GeofenceBroadcastReceiver::class.java)
         // We use FLAG_UPDATE_CURRENT so that we get the same pending intent back when calling
         // addGeofences() and removeGeofences().
-        PendingIntent.getBroadcast(activity, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT)
+        // PendingIntentはMUTABLEでなければならない　Intentで渡すデータが変わるから
+        PendingIntent.getBroadcast(activity, 0, intent, PendingIntent.FLAG_MUTABLE)
     }
 
     fun createGeofence(entry: EntryData, radius: Float) {
@@ -95,7 +97,18 @@ class GeofenceRepository(_activity: Activity) {
 
     }
 
-
-
-
+    fun stopGeofece() {
+        geofencingClient.removeGeofences(geofencePendingIntent).run {
+            addOnSuccessListener {
+                // Geofences removed
+                // ...
+                Log.d(TAG, "stopGeofece: Success")
+            }
+            addOnFailureListener {
+                // Failed to remove geofences
+                // ...
+                Log.e(TAG, "stopGeofece: Failure")
+            }
+        }
+    }
 }
