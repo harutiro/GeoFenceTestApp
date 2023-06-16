@@ -55,6 +55,9 @@ class GeofenceRepository(_activity: Activity) {
             // このサンプルでは、入口と出口の遷移を追跡します。
             .setTransitionTypes(Geofence.GEOFENCE_TRANSITION_ENTER or Geofence.GEOFENCE_TRANSITION_EXIT)
 
+            // 通知の初期遅延を設定します。 このサンプルでは、ジオフェンスに入るとすぐにアラートが生成されます。
+//            .setNotificationResponsiveness(5000)
+
             // ジオフェンスを作成します。
             .build()
 
