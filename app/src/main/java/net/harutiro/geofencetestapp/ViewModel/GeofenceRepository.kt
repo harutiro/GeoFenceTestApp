@@ -30,7 +30,7 @@ class GeofenceRepository(_activity: Activity) {
 
     private val geofencePendingIntent: PendingIntent by lazy {
         val intent = Intent(activity, GeofenceBroadcastReceiver::class.java)
-        // We use FLAG_UPDATE_CURRENT so that we get the same pending intent back when calling
+        // FLAG_UPDATE_CURRENT を使用して、呼び出し時に同じ保留中のインテントを取得します。
         // addGeofences() and removeGeofences().
         // PendingIntentはMUTABLEでなければならない　Intentで渡すデータが変わるから
         PendingIntent.getBroadcast(activity, 0, intent, PendingIntent.FLAG_MUTABLE)
