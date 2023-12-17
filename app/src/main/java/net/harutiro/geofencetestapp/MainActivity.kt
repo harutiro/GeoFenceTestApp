@@ -1,6 +1,7 @@
 package net.harutiro.geofencetestapp
 
 import android.os.Bundle
+import android.preference.PreferenceManager
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.fillMaxSize
@@ -15,10 +16,17 @@ import net.harutiro.geofencetestapp.ViewModel.GeofenceRepository
 import net.harutiro.geofencetestapp.ViewModel.MainViewModel
 import net.harutiro.geofencetestapp.ui.MainScreen
 import net.harutiro.geofencetestapp.ui.theme.GeoFenceTestAppTheme
+import org.osmdroid.config.Configuration
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        // mapを表示するための設定
+        Configuration.getInstance().load(
+            this,
+            PreferenceManager.getDefaultSharedPreferences(this)
+        )
 
         // TODO:Staticで持ってくるのを止める。
         MainViewModel.activity = this

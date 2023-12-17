@@ -72,4 +72,8 @@ dependencies {
     // ViewModel
     implementation "androidx.lifecycle:lifecycle-viewmodel-compose:2.6.1"
 
+    // Map
+    implementation "org.osmdroid:osmdroid-android:6.1.17"
+
+
 }

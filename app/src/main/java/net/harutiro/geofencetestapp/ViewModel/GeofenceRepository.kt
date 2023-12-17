@@ -94,6 +94,7 @@ class GeofenceRepository(_activity: Activity) {
                     // Failed to add geofences
                     // ...
                     Log.e(TAG, "addGeofences: Failure")
+                    Log.e(TAG, it.toString())
                 }
             }
         }
